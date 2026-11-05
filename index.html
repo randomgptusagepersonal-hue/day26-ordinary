@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>The Ordinary Life I Dream About · In Your Corner💜✨</title>
+<meta name="theme-color" content="#2F2648">
+<link rel="preload" href="lora-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="nunito.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Lora';src:url(lora.woff2) format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Lora';src:url(lora-italic.woff2) format('woff2');font-style:italic;font-weight:400 700;font-display:swap}
+@font-face{font-family:'Nunito';src:url(nunito.woff2) format('woff2');font-weight:200 900;font-display:swap}
+@font-face{font-family:'Caveat';src:url(caveat.woff2) format('woff2');font-weight:400 700;font-display:swap}
+:root{
+  --emo:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji';
+  --lora:'Lora',Georgia,serif,var(--emo);--nun:'Nunito','Segoe UI',system-ui,sans-serif,var(--emo);--cav:'Caveat','Segoe Script',cursive,var(--emo);
+  --paper:#F6EDDF;--ink:#46373F;--soft:#6F5E62;--lav:#B9A9D3;--plum:#3A2B4E;--plum2:#5B4880;--night:#1D1830;--nightink:#F3E8DC;
+  --move:2600ms;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--night)}
+body{color:var(--ink);font:400 18px/1.55 var(--nun);-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+h1,h2,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--plum2);outline-offset:3px}
+.nighttime :focus-visible,#lock :focus-visible{outline-color:#fff}
+
+/* ---------- lock: the familiar opening ---------- */
+#lock{position:fixed;inset:0;z-index:30;overflow-y:auto;display:flex;padding:24px 20px;background-color:#2F2648;background-image:radial-gradient(rgba(251,243,228,.5) 1px,transparent 1.5px),radial-gradient(rgba(185,169,211,.4) 1px,transparent 1.5px),linear-gradient(#2A2142,#3F3263 62%,#65548B);background-size:67px 67px,41px 41px,100% 100%;background-position:0 0,19px 25px,0 0;transition:opacity .75s ease}
+#lock.gone{opacity:0;pointer-events:none}
+.lockin{width:100%;max-width:430px;margin:auto;text-align:center;transition:opacity .4s ease,transform .4s ease}
+#lock.open .lockin{opacity:0;transform:translateY(-8px);transition-delay:.42s}
+#padlock{display:block;width:62px;height:78px;margin:0 auto 14px;overflow:visible}
+#shackle{transform-box:view-box;transform-origin:44px 36px;transition:transform .45s cubic-bezier(.3,1.3,.6,1)}
+#lock.open #shackle{transform:translateY(-7px) rotate(24deg)}
+.dayno{font:700 14px/1.3 var(--nun);letter-spacing:.24em;color:#E6DAF4}
+#lock h1{margin:12px 0 10px;font:500 clamp(32px,8.6vw,44px)/1.14 var(--lora);color:#FFF9EE;text-wrap:balance}
+.lsub{font:italic 400 18px/1.45 var(--lora);color:#E8DFF2;text-wrap:balance}
+#passForm{margin-top:26px}
+#passForm label{display:block;margin-bottom:8px;font-size:15px;line-height:1.3;color:#E8DFF2}
+.field{position:relative;display:block}
+#pass{display:block;width:100%;height:52px;padding:0 74px 0 18px;border:2px solid var(--lav);border-radius:14px;background:#FFF9EE;color:var(--ink);font:400 18px/1 var(--nun);outline:0}
+#pass:focus{border-color:#fff;box-shadow:0 0 0 3px #C9B7EA,0 0 0 6px rgba(255,255,255,.2)}
+#toggle{position:absolute;right:4px;top:4px;height:44px;min-width:60px;padding:0 10px;border:0;border-radius:10px;background:none;color:var(--plum2);font-size:15px;line-height:1;text-decoration:underline;text-underline-offset:3px}
+#unlock{display:block;width:100%;min-height:50px;margin-top:12px;border:0;border-radius:999px;background:#D9C9F2;color:#2F2648;font:800 16px/1.2 var(--nun);letter-spacing:.08em;box-shadow:0 8px 18px rgba(15,8,35,.3);transition:background .2s}
+#unlock:hover{background:#E8DDF8}
+#passMsg{min-height:26px;margin-top:12px;font-size:16px;line-height:1.5;color:#FFE2EA}
+.shake{animation:shake .38s ease}
+@keyframes shake{25%{transform:translateX(-6px)}60%{transform:translateX(5px)}85%{transform:translateX(-2px)}}
+
+/* ---------- the home: one strip with a camera moving along it ---------- */
+#stage{position:fixed;inset:0;overflow:hidden;background:var(--paper);transition:background-color var(--move) ease}
+#stage.nighttime{background:var(--night)}
+#camera{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0;transition:transform var(--move) cubic-bezier(.45,.05,.3,1)}
+#camera>*{position:absolute}
+#home{left:-1500px;top:0;display:block}
+.actors{top:0;height:900px;display:block;overflow:visible;opacity:0;transition:opacity 1.1s ease;pointer-events:none}
+.actors.on{opacity:1}
+.actors .st{opacity:0;transition:opacity 1.1s ease}
+.actors .st.on{opacity:1}
+.tint{left:-1500px;top:0;width:7000px;height:900px;opacity:0;transition:opacity var(--move) ease;pointer-events:none}
+.tint.on{opacity:1}
+.glow{left:-1500px;top:0;opacity:0;transition:opacity var(--move) ease;pointer-events:none;display:block}
+.glow.on{opacity:1}
+#stage.still .glow,#stage.still .tint,#stage.still #camera{transition-duration:1.6s}
+.fin{transition:opacity 1.6s ease}
+#grainy{position:absolute;inset:0;z-index:2;pointer-events:none;background:url(grain.png);opacity:.28}
+#floorFade{position:absolute;z-index:1;left:0;right:0;height:36px;pointer-events:none;background:linear-gradient(rgba(246,237,223,0),var(--paper))}
+.nighttime #floorFade{background:linear-gradient(rgba(29,24,48,0),var(--night))}
+#veil{position:fixed;inset:0;z-index:12;background:#FBF4E8;opacity:0;pointer-events:none;transition:opacity .5s ease}
+#veil.on{opacity:1}
+
+/* tiny life in the rooms */
+.sway{animation:sway 7s ease-in-out infinite}
+.sway.b{animation-delay:-3s}
+@keyframes sway{50%{transform:skewX(1.6deg)}}
+.breathe{animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{50%{transform:scaleY(1.018)}}
+.steam{animation:steam 3.6s ease-in-out infinite}
+.steam.b{animation-delay:-1.7s}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}40%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
+.bob{animation:bob .9s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.stride{animation:stride .9s ease-in-out infinite}
+.stride.two{animation-name:stride2}
+@keyframes stride{0%,100%{transform:rotate(19deg)}50%{transform:rotate(-19deg)}}
+@keyframes stride2{0%,100%{transform:rotate(-19deg)}50%{transform:rotate(19deg)}}
+.walkers{transition:transform linear}
+.puff{opacity:.85;animation:puff 3.4s ease-in-out infinite}
+.puff.b{animation-delay:-1.1s}.puff.c{animation-delay:-2.2s}
+@keyframes puff{0%{opacity:0;transform:translateY(10px) scale(.7)}35%{opacity:.95}100%{opacity:0;transform:translateY(-34px) scale(1.1)}}
+
+/* things to tap */
+.hot{z-index:3;width:var(--hot,96px);height:var(--hot,96px);margin:calc(var(--hot,96px)/-2) 0 0 calc(var(--hot,96px)/-2);padding:0;border:0;border-radius:50%;background:none}
+.hot::before{content:'';position:absolute;left:50%;top:50%;width:calc(16px / var(--cam,1));height:calc(16px / var(--cam,1));margin:calc(-8px / var(--cam,1)) 0 0 calc(-8px / var(--cam,1));border-radius:50%;background:rgba(255,250,238,.82);box-shadow:0 0 0 calc(5px / var(--cam,1)) rgba(255,250,238,.3);animation:hint 2.2s ease-in-out infinite}
+.hot.used::before{opacity:.2;animation:none;box-shadow:none}
+@keyframes hint{50%{transform:scale(1.3);box-shadow:0 0 0 calc(10px / var(--cam,1)) rgba(255,250,238,.08)}}
+
+/* speech in the room */
+#say{position:absolute;z-index:6;left:0;top:0;max-width:min(76vw,330px);padding:9px 15px;border-radius:17px;background:#FFFBF3;color:var(--ink);font:700 17px/1.32 var(--nun);box-shadow:0 8px 20px rgba(60,40,50,.24);opacity:0;transform:translate(var(--x,0),calc(var(--y,0) + 6px));transition:opacity .3s ease,transform .3s ease;pointer-events:none}
+#say.on{opacity:1;transform:translate(var(--x,0),var(--y,0))}
+
+/* the clock in the corner: the day passing */
+#clock{position:absolute;z-index:5;left:max(14px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));padding:3px 13px;border-radius:12px;background:rgba(255,251,243,.86);color:var(--plum);font:800 clamp(21px,5.4vw,27px)/1.3 var(--nun);font-variant-numeric:tabular-nums;letter-spacing:.02em;opacity:0;transition:opacity .7s ease,background-color var(--move),color var(--move);outline:0}
+#clock.on{opacity:1}
+.nighttime #clock{background:rgba(29,24,48,.76);color:var(--nightink)}
+
+/* words */
+#words{position:absolute;z-index:4;left:0;right:0;bottom:0;display:flex;flex-direction:column;max-height:82%;min-height:var(--panel,40%);overflow-y:auto;padding:30px 22px max(18px,env(safe-area-inset-bottom));background:linear-gradient(rgba(246,237,223,0),var(--paper) 30px);color:var(--ink);transition:color var(--move);scrollbar-width:thin}
+.nighttime #words{background:linear-gradient(rgba(29,24,48,0),var(--night) 30px);color:var(--nightink)}
+#stage.tall #words{background:linear-gradient(rgba(14,12,34,0),rgba(14,12,34,.88) 60px)}
+#words.away #lines,#words.away #acts{opacity:0;transition:opacity .55s ease}
+#lines>*{animation:appear .9s ease both}
+@keyframes appear{from{opacity:0;transform:translateY(7px)}}
+#lines p{font:italic 400 clamp(18px,4.7vw,21px)/1.48 var(--lora);text-wrap:pretty}
+#lines p+p{margin-top:.62em}
+#lines .strong{font-style:normal;font-weight:600;color:var(--plum)}
+.nighttime #lines .strong{color:#FFF3DF}
+#lines .quiet{font:700 15.5px/1.5 var(--nun);letter-spacing:.06em;color:var(--soft)}
+.nighttime #lines .quiet{color:#D8CBD0}
+#lines .head{margin-bottom:.7em;font:800 15px/1.4 var(--nun);letter-spacing:.09em;color:var(--plum2)}
+#lines .talk{font:400 17.5px/1.42 var(--nun)}
+#lines .talk b{display:block;font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--plum2)}
+#lines .talk.ammu{text-align:right}
+#lines .spoken{font:700 18px/1.4 var(--nun);font-style:normal}
+#acts{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:8px;padding-top:12px}
+.pick{display:block;min-height:44px;max-width:100%;padding:9px 16px;border:1.5px solid var(--plum2);border-radius:14px;background:rgba(255,251,243,.7);color:var(--plum);font:700 16px/1.28 var(--nun);text-align:left;transition:background .2s}
+.pick:hover{background:#fff}
+.pick.chosen{background:var(--plum2);color:#FFF9EE}
+.nighttime .pick{border-color:var(--lav);background:rgba(255,255,255,.08);color:var(--nightink)}
+.nighttime .pick:hover{background:rgba(255,255,255,.18)}
+.q{font:800 16.5px/1.4 var(--nun);color:var(--plum)}
+#next{align-self:flex-end;display:flex;align-items:center;justify-content:center;width:54px;height:54px;margin-top:4px;padding:0;border:0;border-radius:50%;background:var(--plum2);color:#FFF9EE;font:700 25px/1 var(--nun);box-shadow:0 6px 14px rgba(58,43,78,.28);animation:nudge 2.4s ease-in-out infinite,appear .6s ease both;transition:background .2s}
+#next:hover{background:var(--plum)}
+.nighttime #next{background:#D9C9F2;color:#2F2648}
+@keyframes nudge{50%{transform:translateX(4px)}}
+#begin{min-height:52px;margin-top:6px;padding:12px 26px;border:0;border-radius:999px;background:#D9C9F2;color:#2F2648;font:800 17px/1.25 var(--nun);box-shadow:0 8px 18px rgba(8,4,20,.35);transition:background .2s}
+#begin:hover{background:#E8DDF8}
+
+/* the last quiet look */
+#ending{position:absolute;z-index:7;left:0;right:0;bottom:max(26px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 24px;text-align:center;color:#FBF1E2;pointer-events:none}
+#ending>*{animation:appear 1.6s ease both}
+#ending p{font:500 clamp(25px,6.6vw,34px)/1.22 var(--cav);text-wrap:balance;text-shadow:0 1px 10px rgba(10,8,24,.9)}
+#ending .sign{margin-top:8px;font-size:clamp(27px,7vw,36px);font-weight:600;color:#E6DAF4}
+#backBtn{min-height:48px;margin-top:14px;padding:10px 22px;border:1px solid rgba(251,241,226,.6);border-radius:999px;background:rgba(29,24,48,.6);color:#FBF1E2;font:700 15.5px/1.3 var(--nun);pointer-events:auto;transition:background .2s}
+#backBtn:hover{background:rgba(251,241,226,.18)}
+
+#mus{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:9;display:flex;align-items:center;justify-content:center;gap:2px;width:42px;height:42px;padding:0;border:1px solid rgba(90,70,80,.25);border-radius:50%;background:#FFFBF3;color:var(--plum2);box-shadow:0 4px 12px rgba(50,35,45,.2)}
+#mus svg{width:16px;height:16px}
+#mus i{display:none;width:3px;height:14px;background:var(--plum2);border-radius:2px;transform-origin:bottom;animation:bar 1.3s ease-in-out infinite}
+#mus i:nth-child(3){animation-delay:-.45s}#mus i:nth-child(4){animation-delay:-.85s}
+#mus.on svg{display:none}#mus.on i{display:block}
+@keyframes bar{50%{transform:scaleY(.4)}}
+
+/* wide screens: the home fills the height, the words sit to the side */
+#stage.wide #words{left:auto;top:0;bottom:0;width:var(--side);min-height:0;max-height:none;justify-content:center;padding:70px 34px 26px 58px;background:linear-gradient(90deg,rgba(246,237,223,0),var(--paper) 44px)}
+#stage.wide.nighttime #words{background:linear-gradient(90deg,rgba(29,24,48,0),var(--night) 44px)}
+#stage.wide.tall #words{background:linear-gradient(90deg,rgba(14,12,34,0),rgba(14,12,34,.9) 90px)}
+#stage.wide #acts{flex:none}
+#stage.wide #lines p{font-size:clamp(19px,1.7vw,23px)}
+#stage.wide #ending{right:0}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important}
+  #camera,.walkers{transition:none!important}
+  #stage,.tint,.glow,.actors,.actors .st,#clock,#words{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- LOCK -->
+<section id="lock" aria-labelledby="lockT">
+  <div class="lockin">
+    <svg id="padlock" viewBox="0 0 62 78" aria-hidden="true">
+      <path id="shackle" d="M16 38V21a15 15 0 0 1 30 0v17" fill="none" stroke="#E6DAF4" stroke-width="6" stroke-linecap="round"/>
+      <rect x="6" y="34" width="50" height="40" rx="9" fill="#D9C9F2"/>
+      <rect x="6" y="34" width="50" height="40" rx="9" fill="none" stroke="#FFF9EE" stroke-opacity=".5"/>
+      <path d="M31 63c-7-5-10.500-8.500-10.500-12.500 0-3 2.300-5 5-5 2.200 0 4.200 1.200 5.500 3.300 1.300-2.100 3.300-3.300 5.500-3.300 2.700 0 5 2 5 5 0 4-3.500 7.500-10.500 12.500z" fill="#5B4880"/>
+    </svg>
+    <p class="dayno" id="lockDay"></p>
+    <h1 id="lockT"></h1>
+    <p class="lsub" id="lockSub"></p>
+    <form id="passForm" novalidate>
+      <label for="pass">our secret word for today</label>
+      <span class="field">
+        <input id="pass" type="password" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" aria-describedby="passMsg">
+        <button id="toggle" type="button" aria-pressed="false" aria-label="Show the password">show</button>
+      </span>
+      <button id="unlock" type="submit">UNLOCK ♡</button>
+      <p id="passMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<!-- THE HOME -->
+<main id="stage" hidden>
+  <div id="camera"></div>
+  <div id="floorFade" aria-hidden="true"></div>
+  <div id="grainy" aria-hidden="true"></div>
+  <h2 id="clock" tabindex="-1"></h2>
+  <div id="say" role="status"></div>
+  <section id="words" aria-label="What happens next">
+    <div id="lines" aria-live="polite"></div>
+    <div id="acts"></div>
+  </section>
+  <div id="ending" hidden></div>
+</main>
+<div id="veil" aria-hidden="true"></div>
+
+<audio id="song" src="song.mp3" preload="auto" loop></audio>
+<button id="mus" type="button" hidden aria-pressed="false" aria-label="Play music">
+  <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 2.500v13L15.500 9z" fill="currentColor"/></svg><i></i><i></i><i></i>
+</button>
+
+<script src="scenes.js"></script>
+<script src="art.js"></script>
+<script>
+/* =====================================================================
+   DAY 26 SETTINGS. The words are in scenes.js, the drawings in art.js.
+
+   DAY26_PASSWORD: put your chosen password here. This is the only place
+   it is stored. Capital letters and stray spaces don't matter.
+   This page has no server, so the password is a gate for the experience,
+   not real security: keep the link private.
+
+   COUNTDOWN_URL: the full link "Back to the Countdown" should open. The
+   project has no countdown page yet. While this is empty, the button says
+   "Back to the beginning ↑" and starts the day again.
+
+   MUSIC: drop your song in this folder named song.mp3. Until then there's
+   simply no music button, and nothing looks broken.
+   ===================================================================== */
+const DAY26_PASSWORD = 'just-one-day';
+const COUNTDOWN_URL = '';
+
+(() => {
+const $ = s => document.querySelector(s);
+const D = window.DAY26, ART = window.DAY26_ART, PACE = D.pace;
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const norm = s => s.trim().toLowerCase();
+const floorFade = $('#floorFade'), stage = $('#stage'), camera = $('#camera'), lines = $('#lines'), acts = $('#acts'), words = $('#words'), clock = $('#clock'), sayEl = $('#say'), ending = $('#ending'), veil = $('#veil');
+document.documentElement.style.setProperty('--move', PACE.move + 'ms');
+
+/* ---------- lock ---------- */
+const lock = $('#lock'), pass = $('#pass'), passMsg = $('#passMsg'), toggle = $('#toggle');
+$('#lockDay').textContent = D.opening.day; $('#lockT').textContent = D.opening.title; $('#lockSub').textContent = D.opening.sub;
+const NOPES = ['hmm, that’s not it, Ammu. try again? 🥹', 'nope. nice try though, sir. 😭', 'still no. the day can wait, it isn’t going anywhere. 💜'];
+let nopes = 0, unlocked = false;
+if (matchMedia('(pointer:fine)').matches) pass.focus();
+toggle.addEventListener('click', () => {
+  const showing = pass.type === 'text';
+  pass.type = showing ? 'password' : 'text';
+  toggle.textContent = showing ? 'show' : 'hide';
+  toggle.setAttribute('aria-pressed', String(!showing));
+  toggle.setAttribute('aria-label', showing ? 'Show the password' : 'Hide the password');
+  pass.focus();
+});
+$('#passForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (unlocked) return;
+  if (!pass.value.trim()) { passMsg.textContent = 'you have to type something first, bro. 😭'; pass.focus(); return; }
+  if (norm(pass.value) !== norm(DAY26_PASSWORD)) {
+    passMsg.textContent = NOPES[nopes++ % NOPES.length];
+    const f = $('.field'); f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake');
+    pass.select();
+    return;
+  }
+  unlocked = true;
+  playSong();                                            // inside the tap, so the phone allows sound
+  passMsg.textContent = '';
+  pass.blur();
+  lock.classList.add('open');
+  await new Promise(r => setTimeout(r, RM ? 0 : 780));
+  stage.hidden = false;
+  layout();
+  showOpening();
+  lock.classList.add('gone');
+  setTimeout(() => { lock.hidden = true; }, RM ? 0 : 760);
+});
+
+/* ---------- building the home ---------- */
+const svgNS = 'http://www.w3.org/2000/svg';
+camera.innerHTML = ART.home;
+const tints = [0, 1].map(() => { const d = document.createElement('div'); d.className = 'tint'; camera.appendChild(d); return d; });
+const actors = {};
+Object.keys(ART.ACTORS).forEach(k => {
+  const a = ART.ACTORS[k], box = document.createElementNS(svgNS, 'svg');
+  box.setAttribute('class', 'actors'); box.setAttribute('viewBox', `${a.x} 0 ${a.w} 900`); box.setAttribute('width', a.w); box.setAttribute('height', 900);
+  box.setAttribute('aria-hidden', 'true'); box.style.left = a.x + 'px'; box.style.display = 'none';
+  box.innerHTML = (a.always || '') + Object.keys(a.states).map(s => `<g class="st" data-s="${s}">${a.states[s]}</g>`).join('');
+  camera.insertBefore(box, tints[0]);
+  actors[k] = box;
+});
+const glows = {};
+Object.keys(ART.GLOWS).forEach(k => {
+  const t = document.createElement('template'); t.innerHTML = ART.glowSvg(ART.GLOWS[k]);
+  const g = t.content.firstChild; g.setAttribute('class', 'glow'); g.style.display = 'none';
+  camera.appendChild(g); glows[k] = g;
+});
+
+/* ---------- the camera ---------- */
+let scale = 1, wide = false, sideW = 0, camX = 520, camTx = 0, W = 0, H = 0;
+function layout() {
+  W = innerWidth; H = innerHeight;
+  wide = W / H > 1.15;
+  sideW = wide ? Math.min(Math.round(W * .38), 460) : 0;
+  stage.classList.toggle('wide', wide);
+  stage.style.setProperty('--side', sideW + 'px');
+  scale = wide ? H / 900 : Math.min(W / 640, .64 * H / 900);
+  words.style.setProperty('--panel', Math.round(H - 900 * scale + 10) + 'px');
+  floorFade.style.top = wide ? '100%' : Math.round(900 * scale - 34) + 'px';
+  stage.style.setProperty('--hot', Math.max(84, 46 / scale) + 'px');
+  stage.style.setProperty('--cam', scale);
+  place(camX, false);
+}
+function place(x, animate = true, ms) {
+  camX = x;
+  camTx = (W - sideW) / 2 - x * scale;
+  camera.style.transition = animate ? '' : 'none';
+  if (animate && ms) camera.style.transition = `transform ${ms}ms linear`;
+  camera.style.transform = `translate(${camTx}px,0) scale(${scale})`;
+  if (!animate) void camera.offsetWidth;
+}
+addEventListener('resize', () => { layout(); hideSay(); });
+
+/* ---------- light: two tints crossfade, each can leave a pool of lamplight ---------- */
+let tintI = 0;
+function setLight(l) {
+  const next = tints[1 - tintI], old = tints[tintI];
+  const c = l.color, a = l.a;
+  next.style.background = l.hole
+    ? `radial-gradient(${l.hole[2]}px ${l.hole[2] * .86}px at ${l.hole[0] + 1500}px ${l.hole[1]}px, rgba(${c},${a * .08}), rgba(${c},${a * .3}) 45%, rgba(${c},${a}) 100%)`
+    : `rgba(${c},${a})`;
+  next.classList.add('on'); old.classList.remove('on');
+  tintI = 1 - tintI;
+}
+let curActors = null, curGlow = null;
+function setActors(name, state) {
+  if (name !== curActors) {
+    if (curActors) { const o = actors[curActors]; o.classList.remove('on'); setTimeout(() => { if (curActors !== o.dataset.k) o.style.display = 'none'; }, 1200); }
+    const n = actors[name]; n.dataset.k = name; n.style.display = 'block'; void n.getBoundingClientRect(); n.classList.add('on');
+    curActors = name;
+  }
+  if (state) setState(state);
+}
+function setState(s) { actors[curActors].querySelectorAll('.st').forEach(g => g.classList.toggle('on', g.dataset.s === s)); }
+function setGlow(name) {
+  if (name === curGlow) return;
+  if (curGlow) { const o = glows[curGlow], k = curGlow; o.classList.remove('on'); setTimeout(() => { if (curGlow !== k) o.style.display = 'none'; }, PACE.move + 100); }
+  if (name) { const n = glows[name]; n.style.display = 'block'; void n.getBoundingClientRect(); n.classList.add('on'); }
+  curGlow = name || null;
+}
+
+/* ---------- time: tiny pauses that a tap can hurry along ---------- */
+let run = 0, hurry = null;
+const pause = ms => new Promise(res => { const t = setTimeout(done, ms); function done() { clearTimeout(t); if (hurry === done) hurry = null; res(); } hurry = done; });
+document.addEventListener('click', e => { if (hurry && !stage.hidden && !e.target.closest('button,a,input')) hurry(); });
+const readTime = t => PACE.line + t.length * PACE.perChar;
+
+/* ---------- words ---------- */
+function add(cls, text, who) {
+  const p = document.createElement('p');
+  p.className = cls || '';
+  if (who) { const b = document.createElement('b'); b.textContent = who; p.appendChild(b); p.append(text); } else p.textContent = text;
+  lines.appendChild(p);
+  words.scrollTop = words.scrollHeight;
+  return p;
+}
+async function clearWords() {
+  hideSay();
+  words.classList.add('away');
+  await new Promise(r => setTimeout(r, RM ? 0 : 560));
+  lines.textContent = ''; acts.textContent = '';
+  words.classList.remove('away');
+  words.scrollTop = 0;
+}
+
+/* ---------- speech bubbles sit near the person, and never leave the screen ---------- */
+let sayTimer = 0;
+function say(text, atXY) {
+  clearTimeout(sayTimer);
+  sayEl.textContent = text;
+  sayEl.classList.remove('on');
+  const r = sayEl.getBoundingClientRect(), sx = camTx + atXY[0] * scale, sy = atXY[1] * scale;
+  const maxX = (wide ? W - sideW : W) - r.width - 10;
+  sayEl.style.setProperty('--x', Math.round(Math.max(10, Math.min(maxX, sx - r.width / 2))) + 'px');
+  sayEl.style.setProperty('--y', Math.round(Math.max(58, sy - r.height - 6)) + 'px');
+  void sayEl.offsetWidth;
+  sayEl.classList.add('on');
+}
+function hideSay() { clearTimeout(sayTimer); sayEl.classList.remove('on'); }
+
+/* ---------- things to tap ---------- */
+function hotspot(spot, onTap) {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'hot';
+  b.setAttribute('aria-label', spot.label);
+  b.style.left = spot.at[0] + 'px'; b.style.top = spot.at[1] + 'px';
+  b.addEventListener('click', onTap);
+  camera.appendChild(b);
+  return b;
+}
+function clearHots() { camera.querySelectorAll('.hot').forEach(h => h.remove()); }
+const tapOrWait = (el, ms) => new Promise(res => {
+  const t = setTimeout(done, ms);
+  function done() { clearTimeout(t); el.removeEventListener('click', done); if (hurry === done) hurry = null; res(); }
+  el.addEventListener('click', done); hurry = done;
+});
+
+/* ---------- one beat at a time ---------- */
+const live = id => id === run;
+async function beat(b, id) {
+  if (!live(id)) return;
+  if (b.state) setState(b.state);
+  if (b.line) { add('', b.line); await pause(readTime(b.line)); }
+  else if (b.strong) { add('strong', b.strong); await pause(readTime(b.strong) + 300); }
+  else if (b.quiet) { add('quiet', b.quiet); await pause(readTime(b.quiet)); }
+  else if (b.head) { add('head', b.head); await pause(900); }
+  else if (b.talk) { add('talk ' + (b.who === 'Ammu' ? 'ammu' : ''), b.talk, b.who); await pause(readTime(b.talk) + 150); }
+  else if (b.say) { say(b.say, b.at); await pause(PACE.say + b.say.length * 18); }
+  else if (b.wait) await pause(b.wait);
+  else if (b.hold) await pause(PACE.hold);
+  else if (b.clear) await clearWords();
+  else if (b.tap) await tapBeat(b.tap, id);
+  else if (b.spots) spotsBeat(b.spots);
+  else if (b.choose) chooseBeat(b.choose);
+  else if (b.ask) await askBeat(b.ask, id);
+  else if (b.walk) walkBeat(b.walk);
+  else if (b.note) { const p = document.createElement('p'); p.textContent = b.note; ending.appendChild(p); }
+  else if (b.sign) { const p = document.createElement('p'); p.className = 'sign'; p.textContent = b.sign; ending.appendChild(p); }
+  else if (b.back) backBeat();
+}
+async function tapBeat(t, id) {
+  const h = hotspot(t, () => {});
+  for (const s of t.says) {
+    await tapOrWait(h, PACE.idle);
+    if (!live(id)) return;
+    if (s.lamp) { setGlow('bedMoon'); setLight({ color: '14,12,34', a: .78 }); setState('dark'); h.remove(); return; }
+    h.classList.add('used');
+    say(s.say, s.at);
+    await pause(PACE.say);
+    if (!live(id)) return;
+  }
+  h.remove();
+  hideSay();
+}
+function spotsBeat(spots) {
+  spots.forEach(s => {
+    const h = hotspot(s, () => { h.classList.add('used'); say(s.say, s.at); if (s.state) setState(s.state); });
+  });
+}
+function chooseBeat(c) {
+  const q = document.createElement('p'); q.className = 'q'; q.textContent = c.q; acts.appendChild(q);
+  c.options.forEach(o => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'pick'; b.textContent = o.label;
+    b.addEventListener('click', () => {
+      acts.querySelectorAll('.pick').forEach(x => x.classList.remove('chosen'));
+      b.classList.add('chosen'); say(o.say, c.at);
+    });
+    acts.appendChild(b);
+  });
+  words.scrollTop = words.scrollHeight;
+}
+async function askBeat(a, id) {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'pick'; b.textContent = a.label;
+  acts.appendChild(b);
+  words.scrollTop = words.scrollHeight;
+  await tapOrWait(b, PACE.idle);
+  b.remove();
+  if (a.spoken) { add('spoken', a.label); await pause(500); }
+  for (const x of a.then) await beat(x, id);
+  hideSay();
+}
+function walkBeat(w) {
+  const from = camX, ms = RM ? 0 : w.ms, g = actors.street.querySelector('.walkers');
+  g.style.transition = 'none'; g.style.transform = 'translateX(0)'; void g.getBoundingClientRect();
+  g.style.transition = ms ? `transform ${ms}ms linear` : 'none';
+  g.style.transform = `translateX(${w.to - from}px)`;
+  place(w.to, !RM, ms);
+}
+function nextBeat() {
+  return new Promise(res => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.id = 'next'; b.textContent = '→'; b.setAttribute('aria-label', 'On to the next moment');
+    b.addEventListener('click', () => res());
+    acts.appendChild(b);
+    words.scrollTop = words.scrollHeight;
+    b.focus({ preventScroll: true });
+  });
+}
+function backBeat() {
+  const b = document.createElement('button');
+  b.type = 'button'; b.id = 'backBtn';
+  b.textContent = COUNTDOWN_URL ? 'Back to the Countdown →' : 'Back to the beginning ↑';
+  b.addEventListener('click', () => { if (COUNTDOWN_URL) location.href = COUNTDOWN_URL; else showOpening(); });
+  ending.appendChild(b);
+  b.focus({ preventScroll: true });
+}
+
+/* ---------- moving through the day ---------- */
+const toMin = t => { const m = t.match(/(\d+):(\d+) (AM|PM)/); return (+m[1] % 12) * 60 + +m[2] + (m[3] === 'PM' ? 720 : 0); };
+const fromMin = n => { const h = Math.floor(n / 60), m = n % 60, h12 = h % 12 || 12; return `${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
+let clockTimer = 0, clockNow = null;
+function setClock(t, ms) {
+  clearInterval(clockTimer);
+  if (!t) { clock.classList.remove('on'); clockNow = null; return; }
+  const to = toMin(t), from = clockNow === null ? to : clockNow, t0 = Date.now();
+  clock.classList.add('on');
+  clock.textContent = fromMin(from);
+  clockNow = to;
+  if (RM || !ms || from === to) { clock.textContent = t; return; }
+  clockTimer = setInterval(() => {
+    const p = Math.min(1, (Date.now() - t0) / ms);
+    clock.textContent = p >= 1 ? t : fromMin(Math.round(from + (to - from) * p * p * (3 - 2 * p)));
+    if (p >= 1) clearInterval(clockTimer);
+  }, 70);
+}
+async function enter(m) {
+  const already = m.x === camX;
+  const ms = m.still ? 1600 : PACE.move;
+  stage.classList.toggle('still', !!m.still);
+  if (RM) {                                              // reduced motion: one soft fade instead of travelling
+    veil.classList.add('on');
+    await new Promise(r => setTimeout(r, 500));
+  }
+  stage.classList.toggle('nighttime', !!m.night);
+  stage.classList.toggle('tall', !!m.tall);
+  setActors(m.actors, m.state);
+  setGlow(m.glow);
+  setLight(m.light);
+  setClock(m.time, already ? ms * .6 : ms);
+  place(m.x, !RM);
+  if (RM) { await new Promise(r => setTimeout(r, 50)); veil.classList.remove('on'); await new Promise(r => setTimeout(r, 300)); return; }
+  await new Promise(r => setTimeout(r, already ? Math.min(ms, 1500) : ms));
+}
+async function playMoment(i) {
+  const id = ++run, m = D.moments[i];
+  clearHots(); hideSay();
+  await clearWords();
+  if (!live(id)) return;
+  words.hidden = !!m.ending;
+  ending.hidden = !m.ending;
+  if (m.ending) ending.textContent = '';
+  await enter(m);
+  if (!live(id)) return;
+  if (m.time) { clock.setAttribute('aria-label', m.time); clock.focus({ preventScroll: true }); }
+  for (const b of m.beats) {
+    if (!live(id)) return;
+    if (b.next) { await nextBeat(); if (live(id)) playMoment(i + 1); return; }
+    await beat(b, id);
+  }
+  if (live(id) && i < D.moments.length - 1) playMoment(i + 1);
+}
+function showOpening() {
+  const id = ++run, o = D.opening, b = D.before;
+  clearHots(); hideSay();
+  lines.textContent = ''; acts.textContent = ''; ending.hidden = true; ending.textContent = ''; words.hidden = false;
+  clockNow = null; setClock(null);
+  stage.classList.add('nighttime'); stage.classList.remove('tall', 'still');
+  setActors(b.actors, b.state); setGlow(null); setLight(b.light); place(b.x, false);
+  (async () => {
+    for (const l of o.lines) { if (!live(id)) return; add('', l); await pause(readTime(l)); }
+    if (!live(id)) return;
+    const go = document.createElement('button');
+    go.type = 'button'; go.id = 'begin'; go.textContent = o.button;
+    go.addEventListener('click', () => playMoment(0));
+    acts.appendChild(go);
+    words.scrollTop = words.scrollHeight;
+    go.focus({ preventScroll: true });
+  })();
+}
+
+/* ---------- music: one song, starts inside the unlock tap ---------- */
+const song = $('#song'), mus = $('#mus');
+let wantSong = false, fadeTimer = 0;
+const VOL = .5;
+function fadeIn() {
+  clearInterval(fadeTimer);
+  const t0 = Date.now();
+  song.volume = 0;
+  fadeTimer = setInterval(() => {
+    const p = Math.max(0, Math.min(1, (Date.now() - t0) / 2500));
+    song.volume = VOL * p;
+    if (p >= 1) clearInterval(fadeTimer);
+  }, 60);
+}
+function drawMus(on) {
+  mus.classList.toggle('on', on);
+  mus.setAttribute('aria-pressed', String(on));
+  mus.setAttribute('aria-label', on ? 'Pause music' : 'Play music');
+}
+let bad = false, needFade = false;
+function playSong() { if (bad) return; wantSong = true; needFade = true; song.volume = 0; song.play().catch(() => {}); }
+song.addEventListener('error', () => { bad = true; wantSong = false; mus.hidden = true; });
+song.addEventListener('playing', () => { mus.hidden = false; drawMus(true); if (needFade) { needFade = false; fadeIn(); } });
+song.addEventListener('pause', () => drawMus(false));
+mus.addEventListener('click', () => {
+  wantSong = song.paused;
+  if (wantSong) { if (song.volume === 0) song.volume = VOL; song.play().catch(() => {}); } else song.pause();
+});
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) song.pause(); else if (wantSong && !bad) song.play().catch(() => {});
+});
+})();
+</script>
+</body>
+</html>
